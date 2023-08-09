@@ -20,11 +20,11 @@ public class MyTreeSet<E> {
             size++;
             return;
         }
-        putHelper(root, element);
+        putHelper(element, root);
 
     }
 
-    private void putHelper(Node node, E element) {
+    private void putHelper( E element, Node node) {
         Comparable<E> k = (Comparable<E>) element;
         int cmp = k.compareTo(node.element);
         if (cmp < 0) {
@@ -33,7 +33,7 @@ public class MyTreeSet<E> {
                 size++;
                 return;
             }
-            putHelper(node.left, element);
+            putHelper(element, node.left);
         }
         if (cmp > 0) {
             if (node.right == null) {
@@ -41,10 +41,10 @@ public class MyTreeSet<E> {
                 size++;
                 return;
             }
-            putHelper(node.right, element);
+            putHelper(element, node.right);
         }
         if (cmp == 0) {
-            System.out.println("Element already exist");
+            System.out.println("Элемент уже существует");
         }
     }
 
@@ -117,20 +117,20 @@ public class MyTreeSet<E> {
         }
     } private E removeHelper(Node child, Node parent) {
         if (child.left == null && child.right == null) {
-            if (parent.right == child) parent.right = null;
             if (parent.left == child) parent.left = null;
+            if (parent.right == child) parent.right = null;
             size--;
             return child.element;
         }
         if (child.left == null) {
-            if (parent.right == child) parent.right = child.left;
             if (parent.left == child) parent.left = child.right;
+            if (parent.right == child) parent.right = child.right;
             size--;
             return child.element;
         }
         if (child.right == null) {
-            if (parent.right == child) parent.right = child.left;
             if (parent.left == child) parent.left = child.left;
+            if (parent.right == child) parent.right = child.left;
             size--;
             return child.element;
         }
